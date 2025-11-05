@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String      @id @default(uuid())
+  email     String      @unique
+  password  String
+  name      String
+  role      String      @default("user")
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  imports   ImportLog[]
+}
+
+model Student {
+  id           String       @id @default(uuid())
+  studentId    String       @unique // RA
+  name         String
+  enrollments  Enrollment[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model Course {
+  id           String    @id @default(uuid())
+  courseCode   String    @unique
+  name         String
+  workload     Int       // Carga horária
+  classes      Class[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Class {
+  id           String       @id @default(uuid())
+  classId      String      @unique // ID da turma
+  courseId     String
+  course       Course       @relation(fields: [courseId], references: [id])
+  semester     String
+  enrollments  Enrollment[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model Enrollment {
+  id           String    @id @default(uuid())
+  studentId    String
+  student      Student   @relation(fields: [studentId], references: [id])
+  classId      String
+  class        Class     @relation(fields: [classId], references: [id])
+  grade        Float
+  status       String    @default("pending") // approved, failed, pending
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@unique([studentId, classId])
+}
+
+model ImportLog {
+  id                String    @id @default(uuid())
+  userId           String?
+  user             User?     @relation(fields: [userId], references: [id])
+  filename         String
+  fileHash         String?
+  recordsCount     Int
+  status           String    // success, failure
+  errorMessage     String?
+  processingTime   Float     // in milliseconds
+  createdAt        DateTime  @default(now())
+}

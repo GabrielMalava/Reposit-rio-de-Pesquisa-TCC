@@ -1,0 +1,93 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  imports ImportLog[]
+}
+
+model Student {
+  id        Int      @id @default(autoincrement())
+  ra        String   @unique
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  enrollments Enrollment[]
+}
+
+model Course {
+  id            Int      @id @default(autoincrement())
+  code          String   @unique
+  name          String
+  workload      Int      // Carga horária
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  classes Class[]
+}
+
+model Class {
+  id          Int      @id @default(autoincrement())
+  classId     String   @unique // ID único da turma do XML
+  courseId    Int
+  semester    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  course      Course      @relation(fields: [courseId], references: [id])
+  enrollments Enrollment[]
+
+  @@index([courseId])
+  @@index([semester])
+}
+
+model Enrollment {
+  id        Int      @id @default(autoincrement())
+  studentId Int
+  classId   Int
+  grade     Decimal  @decimal(4, 2) // Valor da nota (0-10)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  student Student @relation(fields: [studentId], references: [id])
+  class   Class   @relation(fields: [classId], references: [id])
+
+  @@unique([studentId, classId])
+  @@index([studentId])
+  @@index([classId])
+}
+
+model ImportLog {
+  id                Int      @id @default(autoincrement())
+  userId            Int?
+  fileName           String
+  fileHash           String?
+  recordsImported    Int      @default(0)
+  status             String   // 'success' | 'failure'
+  errorMessage       String?
+  processingTime     Int?     // em milissegundos
+  createdAt          DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@index([createdAt])
+  @@index([status])
+}
+

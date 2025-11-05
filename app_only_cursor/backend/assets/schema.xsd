@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Importacao">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Cursos">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Curso" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Codigo" type="xs:string"/>
+                    <xs:element name="Nome" type="xs:string"/>
+                    <xs:element name="CargaHoraria" type="xs:int"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Turmas">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Turma" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Id" type="xs:string"/>
+                    <xs:element name="CursoCodigo" type="xs:string"/>
+                    <xs:element name="Semestre" type="xs:string"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Alunos">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Aluno" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="RA" type="xs:string"/>
+                    <xs:element name="Nome" type="xs:string"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Notas">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Nota" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="RA" type="xs:string"/>
+                    <xs:element name="TurmaId" type="xs:string"/>
+                    <xs:element name="Valor" type="xs:decimal"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+
+

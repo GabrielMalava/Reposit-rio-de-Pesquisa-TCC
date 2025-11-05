@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Importacao>
+  <Cursos>
+    <Curso>
+      <Codigo>MAT101</Codigo>
+      <Nome>Matemática Básica</Nome>
+      <CargaHoraria>60</CargaHoraria>
+    </Curso>
+    <Curso>
+      <Codigo>PROG101</Codigo>
+      <Nome>Introdução à Programação</Nome>
+      <CargaHoraria>80</CargaHoraria>
+    </Curso>
+    <Curso>
+      <Codigo>FIS101</Codigo>
+      <Nome>Física Geral</Nome>
+      <CargaHoraria>60</CargaHoraria>
+    </Curso>
+  </Cursos>
+  <Turmas>
+    <Turma>
+      <Id>TUR001</Id>
+      <CursoCodigo>MAT101</CursoCodigo>
+      <Semestre>2023-1</Semestre>
+    </Turma>
+    <Turma>
+      <Id>TUR002</Id>
+      <CursoCodigo>PROG101</CursoCodigo>
+      <Semestre>2023-1</Semestre>
+    </Turma>
+    <Turma>
+      <Id>TUR003</Id>
+      <CursoCodigo>FIS101</CursoCodigo>
+      <Semestre>2023-1</Semestre>
+    </Turma>
+  </Turmas>
+  <Alunos>
+    <Aluno>
+      <RA>123456</RA>
+      <Nome>João da Silva</Nome>
+    </Aluno>
+    <Aluno>
+      <RA>234567</RA>
+      <Nome>Maria Santos</Nome>
+    </Aluno>
+    <Aluno>
+      <RA>345678</RA>
+      <Nome>Pedro Oliveira</Nome>
+    </Aluno>
+  </Alunos>
+  <Notas>
+    <Nota>
+      <RA>123456</RA>
+      <TurmaId>TUR001</TurmaId>
+      <Valor>5.0</Valor>
+    </Nota>
+    <Nota>
+      <RA>123456</RA>
+      <TurmaId>TUR002</TurmaId>
+      <Valor>7.5</Valor>
+    </Nota>
+    <Nota>
+      <RA>234567</RA>
+      <TurmaId>TUR001</TurmaId>
+      <Valor>8.0</Valor>
+    </Nota>
+    <Nota>
+      <RA>234567</RA>
+      <TurmaId>TUR002</TurmaId>
+      <Valor>9.0</Valor>
+    </Nota>
+    <Nota>
+      <RA>234567</RA>
+      <TurmaId>TUR003</TurmaId>
+      <Valor>7.0</Valor>
+    </Nota>
+    <Nota>
+      <RA>345678</RA>
+      <TurmaId>TUR001</TurmaId>
+      <Valor>6.5</Valor>
+    </Nota>
+    <Nota>
+      <RA>345678</RA>
+      <TurmaId>TUR003</TurmaId>
+      <Valor>6.0</Valor>
+    </Nota>
+  </Notas>
+</Importacao>
+
+
